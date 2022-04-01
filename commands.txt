@@ -1,0 +1,27 @@
+To sniff the packets use the sniff() function. The sniff() function returns information about all the packets that has been sniffed.
+
+capture = sniff()
+
+To see the summary of packet responses, use summary().
+
+capture.summary()
+
+The sniff() function listens for an infinite period of time until the user interrupts.
+
+To restrict the number of packets to be captured sniff() allows a count parameter. By specifying a value for the count, the packet capturing will be restricted to the specified number.  
+
+capture = sniff(count=5)
+
+You can also filter packets while sniffing using the filter parameter. It uses a Berkeley Packet Filter (BPF) syntax.
+
+The following command will capture only TCP packets:
+
+sniff(filter="tcp", count=5)
+
+When scapy sniffs packets, it generally sniffs from all of your network interfaces. However, we can explicitly mention the interfaces that we would like to sniff on using the iface parameter. The iface can either be an element or a list of elements.
+
+sniff(iface="eth0", count=5)
+
+sniff() function has another interesting parameter called prn that allows you to pass a function that executes with each packet sniffed. This allows us to do some custom actions with each packet sniffed.
+
+sniff(prn=lambda x:x.summary(), count=5)
